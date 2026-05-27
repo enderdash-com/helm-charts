@@ -2,54 +2,47 @@
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/enderdash)](https://artifacthub.io/packages/search?repo=enderdash)
 
-This repository publishes the public Helm chart repository for EnderDash.
-Chart source lives in `main` under `charts/`, while packaged chart releases and
-the Helm `index.yaml` are published by GitHub Actions.
+Helm chart repository for EnderDash.
 
-## Add the chart repository
+## Add the repository
 
 ```bash
 helm repo add enderdash https://charts.enderdash.com
 helm repo update
+helm search repo enderdash
 ```
 
 ## Install the agent
 
-Create the namespace and agent key Secret first:
+Create the namespace and Secret:
 
 ```bash
-kubectl create namespace enderdash --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace enderdash
 kubectl -n enderdash create secret generic enderdash-agent \
-  --from-literal=agentKey='<agentKey>' \
-  --dry-run=client -o yaml | kubectl apply -f -
+  --from-literal=agentKey='<agentKey>'
 ```
 
-Install the read-only agent chart:
+Install the chart:
 
 ```bash
-helm upgrade --install enderdash-agent enderdash/enderdash-agent \
+helm install enderdash-agent enderdash/enderdash-agent \
   --namespace enderdash \
-  --create-namespace \
-  --set agentKeySecret.name=enderdash-agent \
-  --set agentKeySecret.key=agentKey \
   --set rbac.mode=readonly
 ```
 
-Use operator mode only for clusters where EnderDash should run Kubernetes
-mutations such as restarts, scaling, exec, port-forward, debug containers, and
-YAML apply or delete actions:
+To check the release:
 
 ```bash
-helm upgrade --install enderdash-agent enderdash/enderdash-agent \
-  --namespace enderdash \
-  --create-namespace \
-  --set agentKeySecret.name=enderdash-agent \
-  --set agentKeySecret.key=agentKey \
-  --set rbac.mode=operator
+helm list -n enderdash
+kubectl -n enderdash get pods -l app.kubernetes.io/name=enderdash-agent
 ```
+
+Use `--set rbac.mode=operator` when EnderDash should be allowed to run
+Kubernetes actions such as restarts, scaling, exec, port-forward, debug
+containers, and YAML apply or delete.
 
 ## Releasing
 
-Every chart release needs a new `version` in the chart's `Chart.yaml`.
-Pushing chart changes to `main` runs chart-releaser, which packages changed
-charts, creates GitHub releases, and updates the GitHub Pages index.
+Bump `charts/enderdash-agent/Chart.yaml` before publishing a new chart version.
+Pushing chart changes to `main` runs chart-releaser, creates a GitHub release,
+and updates the GitHub Pages index.

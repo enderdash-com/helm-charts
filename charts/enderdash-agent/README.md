@@ -1,43 +1,43 @@
 # EnderDash Agent
 
-The `enderdash-agent` chart installs the EnderDash standalone agent in a
-Kubernetes cluster. The agent connects the cluster to an EnderDash server record
-and exposes inventory, logs, diagnostics, resource views, and optional operator
-actions.
+Installs the EnderDash standalone agent in a Kubernetes cluster.
 
-## Prerequisites
+## Before you begin
 
-- Kubernetes 1.24 or newer.
-- Helm 3.
-- An EnderDash agent key from the server setup page.
+- Kubernetes 1.24 or newer
+- Helm 3
+- An agent key from the EnderDash server setup page
 
 ## Install
 
-Create the namespace and Secret that stores the agent key:
+Create the namespace and Secret:
 
 ```bash
-kubectl create namespace enderdash --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace enderdash
 kubectl -n enderdash create secret generic enderdash-agent \
-  --from-literal=agentKey='<agentKey>' \
-  --dry-run=client -o yaml | kubectl apply -f -
+  --from-literal=agentKey='<agentKey>'
 ```
 
-Install the chart:
+Add the Helm repository and install the chart:
 
 ```bash
 helm repo add enderdash https://charts.enderdash.com
 helm repo update
-helm upgrade --install enderdash-agent enderdash/enderdash-agent \
+helm install enderdash-agent enderdash/enderdash-agent \
   --namespace enderdash \
-  --create-namespace \
-  --set agentKeySecret.name=enderdash-agent \
-  --set agentKeySecret.key=agentKey \
   --set rbac.mode=readonly
 ```
 
-Use `rbac.mode=operator` only for clusters where EnderDash should run
-Kubernetes mutations such as restarts, scaling, exec, port-forward, debug
-containers, and YAML apply or delete actions.
+To check the deployment:
+
+```bash
+helm list -n enderdash
+kubectl -n enderdash get pods -l app.kubernetes.io/name=enderdash-agent
+```
+
+Use `--set rbac.mode=operator` when EnderDash should be allowed to run
+Kubernetes actions such as restarts, scaling, exec, port-forward, debug
+containers, and YAML apply or delete.
 
 ## Values
 
@@ -49,7 +49,7 @@ containers, and YAML apply or delete actions.
 | `imagePullSecrets` | `[]` | Image pull secrets for private registries. |
 | `agentKeySecret.name` | `enderdash-agent` | Secret containing the EnderDash agent key. |
 | `agentKeySecret.key` | `agentKey` | Secret key that stores the agent key value. |
-| `rbac.mode` | `readonly` | `readonly` grants inventory and diagnostics access. `operator` adds Kubernetes mutation permissions. |
+| `rbac.mode` | `readonly` | `readonly` grants inventory access. `operator` adds Kubernetes action permissions. |
 | `podAnnotations` | `{}` | Extra annotations for the agent Pod. |
 | `podLabels` | `{}` | Extra labels for the agent Pod. |
 | `podSecurityContext` | See `values.yaml` | Pod security context. |
