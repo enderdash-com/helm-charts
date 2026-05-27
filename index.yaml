@@ -5,6 +5,49 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: Make install instructions idempotent.
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/images: |
+        - name: enderdash-agent
+          image: ghcr.io/enderdash-com/enderdash-agent:latest
+      artifacthub.io/links: |
+        - name: Website
+          url: https://enderdash.com
+        - name: Documentation
+          url: https://enderdash.com/docs
+        - name: Helm chart source
+          url: https://github.com/enderdash-com/helm-charts
+        - name: Deployment manifests
+          url: https://github.com/enderdash-com/deploy
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-05-27T17:40:21.907246489Z"
+    description: EnderDash standalone agent for Kubernetes cluster management.
+    digest: c8c910c157027e85e278c9cd555de818dbc5b192e3eb350277e3ca9728c3c9f3
+    home: https://enderdash.com
+    icon: https://enderdash.com/logo.svg
+    keywords:
+    - enderdash
+    - minecraft
+    - kubernetes
+    - server-management
+    - observability
+    kubeVersion: '>=1.24.0-0'
+    maintainers:
+    - name: EnderDash
+      url: https://enderdash.com
+    name: enderdash-agent
+    sources:
+    - https://github.com/enderdash-com/helm-charts
+    - https://github.com/enderdash-com/deploy
+    type: application
+    urls:
+    - https://github.com/enderdash-com/helm-charts/releases/download/enderdash-agent-0.1.3/enderdash-agent-0.1.3.tgz
+    version: 0.1.3
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: Publish Artifact Hub repository metadata with each chart release.
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/images: |
@@ -100,4 +143,4 @@ entries:
     urls:
     - https://github.com/enderdash-com/helm-charts/releases/download/enderdash-agent-0.1.0/enderdash-agent-0.1.0.tgz
     version: 0.1.0
-generated: "2026-05-27T17:30:05.210162229Z"
+generated: "2026-05-27T17:40:21.907280159Z"
