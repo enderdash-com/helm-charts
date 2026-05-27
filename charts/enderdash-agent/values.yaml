@@ -1,0 +1,49 @@
+image:
+  repository: ghcr.io/enderdash-com/enderdash-agent
+  tag: latest
+  pullPolicy: Always
+
+imagePullSecrets: []
+
+agentKeySecret:
+  name: enderdash-agent
+  key: agentKey
+
+rbac:
+  mode: readonly
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 512Mi
+
+persistence:
+  enabled: false
+  existingClaim: ""
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
