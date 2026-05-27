@@ -42,10 +42,10 @@ jobs:
           git worktree add -B gh-pages-metadata "$pages_dir" origin/gh-pages
           cp artifacthub-repo.yml "$pages_dir/artifacthub-repo.yml"
           cd "$pages_dir"
-          if git diff --quiet -- artifacthub-repo.yml; then
+          git add artifacthub-repo.yml
+          if git diff --cached --quiet -- artifacthub-repo.yml; then
             echo "Artifact Hub repository metadata is already current."
           else
-            git add artifacthub-repo.yml
             git commit -m "Update Artifact Hub repository metadata"
             git push origin HEAD:gh-pages
           fi
