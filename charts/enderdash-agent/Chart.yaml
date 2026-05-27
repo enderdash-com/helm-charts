@@ -1,9 +1,39 @@
 apiVersion: v2
 name: enderdash-agent
-description: EnderDash standalone agent for Kubernetes clusters.
+description: EnderDash standalone agent for Kubernetes cluster management.
 type: application
-version: 0.1.0
-appVersion: latest
+version: 0.1.1
+appVersion: "latest"
+kubeVersion: ">=1.24.0-0"
 home: https://enderdash.com
+icon: https://enderdash.com/logo.svg
+keywords:
+  - enderdash
+  - minecraft
+  - kubernetes
+  - server-management
+  - observability
+maintainers:
+  - name: EnderDash
+    url: https://enderdash.com
 sources:
   - https://github.com/enderdash-com/helm-charts
+  - https://github.com/enderdash-com/deploy
+annotations:
+  artifacthub.io/category: monitoring-logging
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/images: |
+    - name: enderdash-agent
+      image: ghcr.io/enderdash-com/enderdash-agent:latest
+  artifacthub.io/links: |
+    - name: Website
+      url: https://enderdash.com
+    - name: Documentation
+      url: https://enderdash.com/docs
+    - name: Helm chart source
+      url: https://github.com/enderdash-com/helm-charts
+    - name: Deployment manifests
+      url: https://github.com/enderdash-com/deploy
+  artifacthub.io/changes: |
+    - kind: changed
+      description: Improved chart metadata and documentation for Artifact Hub.

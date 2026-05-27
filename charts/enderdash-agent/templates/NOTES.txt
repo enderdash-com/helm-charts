@@ -1,0 +1,6 @@
+EnderDash agent has been installed in namespace {{ .Release.Namespace }}.
+
+The chart expects the agent key in Secret {{ .Values.agentKeySecret.name }} at key {{ .Values.agentKeySecret.key }}.
+Check the agent Pod with:
+
+  kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/name=enderdash-agent
