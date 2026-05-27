@@ -16,9 +16,10 @@ actions.
 Create the namespace and Secret that stores the agent key:
 
 ```bash
-kubectl create namespace enderdash
+kubectl create namespace enderdash --dry-run=client -o yaml | kubectl apply -f -
 kubectl -n enderdash create secret generic enderdash-agent \
-  --from-literal=agentKey='<agentKey>'
+  --from-literal=agentKey='<agentKey>' \
+  --dry-run=client -o yaml | kubectl apply -f -
 ```
 
 Install the chart:

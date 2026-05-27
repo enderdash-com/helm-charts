@@ -18,9 +18,10 @@ helm repo update
 Create the namespace and agent key Secret first:
 
 ```bash
-kubectl create namespace enderdash
+kubectl create namespace enderdash --dry-run=client -o yaml | kubectl apply -f -
 kubectl -n enderdash create secret generic enderdash-agent \
-  --from-literal=agentKey='<agentKey>'
+  --from-literal=agentKey='<agentKey>' \
+  --dry-run=client -o yaml | kubectl apply -f -
 ```
 
 Install the read-only agent chart:
