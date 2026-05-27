@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - "charts/**"
+      - "artifacthub-repo.yml"
+      - ".github/workflows/release-charts.yml"
 
 permissions:
   contents: write
@@ -32,3 +34,18 @@ jobs:
         uses: helm/chart-releaser-action@v1.7.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Publish Artifact Hub repository metadata
+        run: |
+          git fetch origin gh-pages
+          pages_dir="$(mktemp -d)"
+          git worktree add -B gh-pages-metadata "$pages_dir" origin/gh-pages
+          cp artifacthub-repo.yml "$pages_dir/artifacthub-repo.yml"
+          cd "$pages_dir"
+          if git diff --quiet -- artifacthub-repo.yml; then
+            echo "Artifact Hub repository metadata is already current."
+          else
+            git add artifacthub-repo.yml
+            git commit -m "Update Artifact Hub repository metadata"
+            git push origin HEAD:gh-pages
+          fi
