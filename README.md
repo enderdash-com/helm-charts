@@ -1,5 +1,7 @@
 # EnderDash Helm charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/enderdash)](https://artifacthub.io/packages/search?repo=enderdash)
+
 This repository publishes the public Helm chart repository for EnderDash.
 Chart source lives in `main` under `charts/`, while packaged chart releases and
 the Helm `index.yaml` are published by GitHub Actions.
