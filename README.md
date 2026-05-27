@@ -7,7 +7,7 @@ the Helm `index.yaml` are published by GitHub Actions.
 ## Add the chart repository
 
 ```bash
-helm repo add enderdash https://enderdash-com.github.io/helm-charts
+helm repo add enderdash https://charts.enderdash.com
 helm repo update
 ```
 
