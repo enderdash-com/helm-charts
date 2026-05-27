@@ -4,3 +4,6 @@ description: EnderDash standalone agent for Kubernetes clusters.
 type: application
 version: 0.1.0
 appVersion: latest
+home: https://enderdash.com
+sources:
+  - https://github.com/enderdash-com/helm-charts
