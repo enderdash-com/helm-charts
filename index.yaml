@@ -5,6 +5,49 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: Grant full cluster permissions by default and keep read-only RBAC as an opt-in mode.
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/images: |
+        - name: enderdash-agent
+          image: ghcr.io/enderdash-com/enderdash-agent:latest
+      artifacthub.io/links: |
+        - name: Website
+          url: https://enderdash.com
+        - name: Documentation
+          url: https://enderdash.com/docs
+        - name: Helm chart source
+          url: https://github.com/enderdash-com/helm-charts
+        - name: Deployment manifests
+          url: https://github.com/enderdash-com/deploy
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-06-08T13:44:53.791384019Z"
+    description: EnderDash standalone agent for Kubernetes cluster management.
+    digest: 39ea59baea15956b7951a9f3404ac4d02722ce664617b3b1c90a9b3716cf0af1
+    home: https://enderdash.com
+    icon: https://enderdash.com/logo.svg
+    keywords:
+    - enderdash
+    - minecraft
+    - kubernetes
+    - server-management
+    - observability
+    kubeVersion: '>=1.24.0-0'
+    maintainers:
+    - name: EnderDash
+      url: https://enderdash.com
+    name: enderdash-agent
+    sources:
+    - https://github.com/enderdash-com/helm-charts
+    - https://github.com/enderdash-com/deploy
+    type: application
+    urls:
+    - https://github.com/enderdash-com/helm-charts/releases/download/enderdash-agent-0.1.6/enderdash-agent-0.1.6.tgz
+    version: 0.1.6
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: Simplify chart installation commands.
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/images: |
@@ -186,4 +229,4 @@ entries:
     urls:
     - https://github.com/enderdash-com/helm-charts/releases/download/enderdash-agent-0.1.0/enderdash-agent-0.1.0.tgz
     version: 0.1.0
-generated: "2026-05-27T17:44:19.96522344Z"
+generated: "2026-06-08T13:44:53.7914111Z"
