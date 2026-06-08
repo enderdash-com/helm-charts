@@ -26,8 +26,7 @@ Install the chart:
 
 ```bash
 helm install enderdash-agent enderdash/enderdash-agent \
-  --namespace enderdash \
-  --set rbac.mode=readonly
+  --namespace enderdash
 ```
 
 To check the release:
@@ -37,9 +36,12 @@ helm list -n enderdash
 kubectl -n enderdash get pods -l app.kubernetes.io/name=enderdash-agent
 ```
 
-Use `--set rbac.mode=operator` when EnderDash should be allowed to run
-Kubernetes actions such as restarts, scaling, exec, port-forward, debug
-containers, and YAML apply or delete.
+The default install grants EnderDash cluster-wide Kubernetes permissions so it
+can manage workloads, exec sessions, port-forwards, debug containers, and YAML
+apply or delete operations.
+
+Use `--set rbac.mode=readonly` when you want to restrict EnderDash to inventory
+and log access.
 
 ## Releasing
 

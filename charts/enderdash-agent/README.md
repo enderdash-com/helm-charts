@@ -24,8 +24,7 @@ Add the Helm repository and install the chart:
 helm repo add enderdash https://charts.enderdash.com
 helm repo update
 helm install enderdash-agent enderdash/enderdash-agent \
-  --namespace enderdash \
-  --set rbac.mode=readonly
+  --namespace enderdash
 ```
 
 To check the deployment:
@@ -35,9 +34,12 @@ helm list -n enderdash
 kubectl -n enderdash get pods -l app.kubernetes.io/name=enderdash-agent
 ```
 
-Use `--set rbac.mode=operator` when EnderDash should be allowed to run
-Kubernetes actions such as restarts, scaling, exec, port-forward, debug
-containers, and YAML apply or delete.
+The default install grants EnderDash cluster-wide Kubernetes permissions so it
+can manage workloads, exec sessions, port-forwards, debug containers, and YAML
+apply or delete operations.
+
+Use `--set rbac.mode=readonly` when you want to restrict EnderDash to inventory
+and log access.
 
 ## Values
 
@@ -49,7 +51,7 @@ containers, and YAML apply or delete.
 | `imagePullSecrets` | `[]` | Image pull secrets for private registries. |
 | `agentKeySecret.name` | `enderdash-agent` | Secret containing the EnderDash agent key. |
 | `agentKeySecret.key` | `agentKey` | Secret key that stores the agent key value. |
-| `rbac.mode` | `readonly` | `readonly` grants inventory access. `operator` adds Kubernetes action permissions. |
+| `rbac.mode` | `cluster-admin` | `cluster-admin` grants full cluster access. `readonly` restricts EnderDash to inventory and log access. |
 | `podAnnotations` | `{}` | Extra annotations for the agent Pod. |
 | `podLabels` | `{}` | Extra labels for the agent Pod. |
 | `podSecurityContext` | See `values.yaml` | Pod security context. |

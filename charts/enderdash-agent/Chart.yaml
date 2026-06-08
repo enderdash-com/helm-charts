@@ -2,7 +2,7 @@ apiVersion: v2
 name: enderdash-agent
 description: EnderDash standalone agent for Kubernetes cluster management.
 type: application
-version: 0.1.5
+version: 0.1.6
 appVersion: "latest"
 kubeVersion: ">=1.24.0-0"
 home: https://enderdash.com
@@ -36,4 +36,4 @@ annotations:
       url: https://github.com/enderdash-com/deploy
   artifacthub.io/changes: |
     - kind: changed
-      description: Simplify chart installation commands.
+      description: Grant full cluster permissions by default and keep read-only RBAC as an opt-in mode.

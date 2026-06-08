@@ -10,7 +10,7 @@ agentKeySecret:
   key: agentKey
 
 rbac:
-  mode: readonly
+  mode: cluster-admin
 
 podAnnotations: {}
 podLabels: {}

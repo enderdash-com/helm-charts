@@ -44,7 +44,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "enum": ["readonly", "operator"]
+          "enum": ["cluster-admin", "readonly"]
         }
       }
     },
