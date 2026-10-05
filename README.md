@@ -48,3 +48,8 @@ and log access.
 Bump `charts/enderdash-agent/Chart.yaml` before publishing a new chart version.
 Pushing chart changes to `main` runs chart-releaser, creates a GitHub release,
 and updates the GitHub Pages index.
+
+## Contributing and support
+
+Read [the contribution guide](CONTRIBUTING.md) for development and review.
+Use [the support guide](SUPPORT.md) for questions and issue routing.
